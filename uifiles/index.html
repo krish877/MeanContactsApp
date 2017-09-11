@@ -5,7 +5,46 @@
 	<title>Contact App</title>
 </head>
 <body>
+
+<div class="container">
+	<a href="#node" class="btn btn-primary">Data from Node</a>
+	<a href="#rest" class="btn btn-primary">Data from RestService</a>
+</div>
+<div class="container">
+<ng-view></ng-view>
+</div>
 <div class="container" ng-controller="AppCtrl">
+   <h1>contacts list</h1>
+   <table class="table">
+   	   <thead>
+   	   	  <tr>
+   	   	  	<th>Name</th>
+   	   	  	<th>Number</th>
+   	   	  	<th>Email</th>
+   	   	  	<th>Action</th>
+   	   	  	<th></th>
+   	   	  </tr>
+   	   </thead>
+   	   <tbody>
+   	      <tr>
+   	      	<th><input ng-model="contact.name" class="form-control" type="text"> </th>
+   	      	<th><input ng-model="contact.number" class="form-control" type="number"></th>
+   	      	<th><input ng-model="contact.email" class="form-control" type="text"></th>
+   	      	<th><button ng-click="addContact()" class="btn btn-primary" >Add Contact</button></th>
+   	      	<th><button ng-click="update()" class="btn btn-info" >Update</button> <button ng-click="clear()" class="btn btn-info" >Clear</button></th>
+   	      </tr>
+   	   	  <tr ng-repeat='contact in contacts'>
+   	   	  	<th>{{contact.name}}</th>
+   	   	  	<th>{{contact.number}}</th>
+   	   	  	<th>{{contact.email}}</th>
+   	   	  	<th><button ng-click="remove(contact._id)" class="btn btn-danger">Remove</button></th>
+   	   	  	<th><button ng-click="edit(contact._id)" class="btn btn-warning">Edit</button></th>
+   	   	  </tr>
+   	   </tbody>
+   </table>
+</div>
+
+<div class="container" ng-controller="AppCtrlRS">
    <h1>contacts list</h1>
    <table class="table">
    	   <thead>
@@ -37,5 +76,6 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="controllers/controller.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
 </body>
 </html>

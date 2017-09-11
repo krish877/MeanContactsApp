@@ -1,4 +1,16 @@
-var myApp = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngRoute']);
+
+myApp.config(function($routeProvider){
+$routeProvider.when('/node',{
+	templateUrl: 'node.html',
+	controller: 'AppCtrl'
+}).when('rest',{
+	templateUrl: 'rest.html',
+	controller:'AppCtrlRS'
+});
+});
+
+
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     console.log("Hello World from controller");
 
@@ -50,3 +62,15 @@ refresh();
     }
     }
     ]);
+
+myApp.controller('AppCtrlRS',['$scope','$http',function($scope,$http){
+var refresh = function(){
+	 $http.get('http://localhost:9191/myapp/contactservice/getAll').then(function(response){
+    console.log('Received resposne from get request'+response.data);
+    $scope.contacts=response.data;
+    $scope.contact={};
+    });
+}
+
+refresh();
+}]);
